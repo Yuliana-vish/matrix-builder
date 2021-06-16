@@ -1,9 +1,5 @@
 import { Component } from 'react';
-//import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
-//import { connect } from 'react-redux';
 import GetSettings from './GetSettings';
-//import actions from '../../redux/matrix/actions';
 
 class Form extends Component {
   state = {
@@ -39,17 +35,5 @@ class Form extends Component {
   }
 }
 
-
-// const mapDispatchToProps = dispatch => ({
-//   onSubmit: (columns, rows, cells) => dispatch(actions.getSettings(columns, rows, cells)),
-// });
-
-Form.propTypes = {
-  columns: PropTypes.number.isRequired,
-  rows: PropTypes.number.isRequired,
-  cells: PropTypes.number.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-
 export default Form;
-//export default connect(null, mapDispatchToProps)(Form);
+

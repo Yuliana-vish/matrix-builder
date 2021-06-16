@@ -1,5 +1,5 @@
 const topCells = (value) => {
-    return <th>{value}</th>
+    return <th key={value}>{value}</th>
 };
 
 const TopUnit = columns => {

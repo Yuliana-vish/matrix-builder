@@ -1,78 +1,101 @@
 import getRandomMatrix from './GetRandomMatrix.js';
 import TableHeader from './TableHeader';
+import { useEffect, useState } from 'react';
+//import { v4 as uuidv4 } from 'uuid';
 
+// const randomGenerator = (item, i) => ({
+//   Amount: Math.floor(Math.random() * (999 - 100 + 1)) + 100,
+//   ID: i,
+// });
 
 const Table = ({ columns, rows, cells }) => {
-  const arr = getRandomMatrix(columns, rows, cells);
-  console.log(arr);
+  /// получаем матрицу
+  // const [arr, setArr] = useState();
+  // useEffect(() => {
+  //   const arr = Array(columns * rows)
+  //     .fill(0)
+  //     .map(randomGenerator);
+  //   setArr(arr);
+  //   console.log(arr);
+  // }, [columns, rows]);
 
-   // const rowNumber = rows => {
-  //   let cell = [];
-  //   for (let i = 0; i < rows.length; i++) {
-  //     cell.push(i+1)
-  //   }
-  //   return cell;
-  // };
-  // const num = rowNumber(rows);
+  //получаем матрицу 
+    const [arr, setArr] = useState();
+    useEffect(() => {
+      const arr = getRandomMatrix(columns, rows);
+      setArr(arr);
+    }, [columns, rows])
 
-   
-  // const sumNumber = rows => {
-  //  return rows.forEach(row => 
-  //     row.reduce((a, b) => a + b)
-  //   );    
-  // } 
-  // const sum = sumNumber(rows)
+  //сумма по строке
+  const [sum, setRowSum] = useState();
+  useEffect(() => {
+    if (arr) {
+      const sum = sumRowNumbers(arr);
+      setRowSum(sum);
+    }
+  }, [arr]);
+
+  const sumRowNumbers = rows => {
+    return rows.map(row => {
+      return row.reduce((acc, el) => acc + el, 0);
+    });
+  };
+
+  
+  ///среднее по колонке
+
+  ///добавить строку
+
+  ///удалить строку
+
+  ///ближайшее значение
+
+  ///увеличить на единицу по клику
+
+
+
+
+
+
 
 
   return (
-    <>
-      <hr />
-      <div className="/">
-        <table className="/">
-          <TableHeader columns={columns} />
+    <>   
+       <hr />
+       <div className="/">
+         <table className="/">
+           <TableHeader columns={columns} />
 
           <tbody>
-            {arr &&
-              arr.map((row, i) => (
-                <tr key={i}>
-                  <td>*</td>
-
-                  {/* <td>{num}</td> */}
-                  {row.map((col, j) => (
-                    <td key={j}>{col} ; </td>
-                  ))}
-
-                                   
-                  {/* <td>{sum}</td> */}
-                  <td>*</td>
-
-                  <button type="submit"> x </button>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        <button type="submit">add row</button>
-      </div>
-    </>
-  );
-};
+             {arr &&
+               sum &&
+               arr.map((row, i) => (
+                 <tr key={i}>
+                   <td>*</td>
+                   {row.map((col, j) => (
+                     <td key={j}>
+                       <div>{col}</div>
+                     </td>
+                   ))}
+                   <td>
+                     <div>{sum[i]}</div>
+                   </td>
+                   <td>
+                     <button type="submit"> x </button>
+                   </td>
+                 </tr>
+               ))}
+             <tr>
+               <td>Avg</td> 
+                {/* <td><div>{calc}</div></td>  */}
+             </tr>
+           </tbody>
+         </table>
+         <button type="submit">add row</button>
+       </div >
+       </>
+);};
 
 
 
 export default Table;
-
-// }
-//export default connect(mapStateToProps)(Table);
-
-
-
-     /* <tbody>
-            <tr>
-              <td>номер строки</td>
-              <td>значение ячейки</td>
-              <td>сумма строки</td>
-            </tr>
-          </tbody> */
-   
-
-   

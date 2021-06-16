@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const GetSettings = ({ addInputData, columns, rows, cells }) => {
   return (
     <>
@@ -46,9 +44,4 @@ const GetSettings = ({ addInputData, columns, rows, cells }) => {
   );
 };
 
-GetSettings.propTypes = {
-  columns: PropTypes.number.isRequired,
-  rows: PropTypes.number.isRequired,
-  cells: PropTypes.number.isRequired,
-};
 export default GetSettings;

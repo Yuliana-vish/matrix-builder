@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 
 const App = () => {
-  const [matrix, setMatrix] = useState({})
+  const [matrix, setMatrix] = useState()
 
   const onHandleSubmit = (event) => {
     //console.log(event)
@@ -15,15 +15,15 @@ const App = () => {
   }
   
   return (
-      <>
-        <section className="/">
-          <Form onSubmit={onHandleSubmit} />
-        </section>
-        <section className="/">
-        <Table {...matrix}/>
-        </section>
-      </>
-    );
+    <>
+      <section className="/">
+        <Form onSubmit={onHandleSubmit} />
+      </section>
+      <section className="/">
+        {matrix && <Table {...matrix} />}
+      </section>
+    </>
+  );
 
 }
 

@@ -1,46 +1,67 @@
 
+// return (
+//   <div className="matrix" style="/">
+    {/* {matrix.map((item, index) => (
+        ((index % columnsNumber) === (columnsNumber - 1))
+          ? (
+            <>
+              <MatrixItem
+                key={item.ID}
+                matrixItem={item}
+                percentage={item.Amount / rowSums[Math.floor(index / columnsNumber)]}
+              />
+              <RowSum
+                key={uuidv4()}
+                amount={rowSums[Math.floor(index / columnsNumber)]}
+              />
+            </>
+          )
+          : (
+            <MatrixItem
+              key={item.ID}
+              matrixItem={item}
+              percentage={item.Amount / rowSums[Math.floor(index / columnsNumber)]}
+            />
+          )
+      ))}
+      {columnAverage.map((item) => (
+        <ColumnAverage
+          key={uuidv4()}
+          amount={item}
+        />
+      ))} */}
+  {/* </div>
+);
+}; */}
 
+Задание Frontend на работу с объектами
+Технические условия
+Использовать react + redux
+Входящие параметры
+Числа M, N, X
 
+Подготовка
+Создать матрицу M*N (строчки, колонки)
+Значение места пресечения — объект с уникальным идентификатором ID 
+и количеством Amount: int (3-х значный рандом)
+Найти сумму по каждой строчке M и среднее по каждому столбику N
 
+Вывод таблицы
+Вывести результирующие данные в таблицу с хорошим UX. 
+В основных ячейках таблицы выводится Amount, ранее автоматически сгенерированный, 
+справа сумма по строкам M, 
+снизу — среднее по столбцам N.
 
-// export default Table;
+Динамика ячеек
+При нажатии на ячейку увеличивать значение Amount на 1 и соответственно менять среднее 
+этого столбика и сумму этой строки
+При наведении на ячейку подсветить X ячеек, Amount которых самый близкий к Amount текущей ячейки.
+При наведении на ячейку суммы по строчке необходимо заменять значение ячеек на процент 
+их вклада в общую сумму и добавить фон: столбик, который наглядно покажет величину процента. 
+Фактически закрасить часть ячейки.
 
-    // const results = [];
-    // for (let i = 0; i < columns; i++) results.push([]);
-    // let counter = 1;
-    // let startColumn = 0;
-    // let endColumn = columns - 1;
-    // let startRow = 0;
-    // let endRow = rows - 1;
-    //       while (startColumn <= endColumn && startRow <= endRow) {
-    //         // Top row
-    //         for (let i = startColumn; i <= endColumn; i++) {
-    //           results[startRow][i] = counter;
-    //           counter++;
-    //         }
-    //         startRow++;
-    //         // Right column
-    //         for (let i = startRow; i <= endRow; i++) {
-    //           results[i][endColumn] = counter;
-    //           counter++;
-    //         }
-    //         endColumn--;
-    //         // Bottom row
-    //         for (let i = endColumn; i >= startColumn; i--) {
-    //           results[endRow][i] = counter;
-    //           counter++;
-    //         }
-    //         endRow--;
-    //         // start column
-    //         for (let i = endRow; i >= startRow; i--) {
-    //           results[i][startColumn] = counter;
-    //           counter++;
-    //         }
-    //         startColumn++;
-    //       }
-    // return results;
-    
- 
-        
- 
-
+Динамика строк
+Дать возможность удалить строку с таблицы, при этом должны поменяться 
+средние значения по каждому столбику
+Дать возможность добавить строку, фактически M+1. При этом строка заполняется 
+по всем правилам таблицы.
