@@ -1,14 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+//import { useEffect, useState } from 'react';
+
+const ColumnAvg = ({avg}) => {
+
+  return (
+    <div className="/">{avg}</div>
+  );
+}
+
+  ColumnAvg.propTypes = {
+    amount: PropTypes.number.isRequired,
+  };
 
 
-
-const ColumnAvп = ({ amount }) => (
-  <div className="/">{amount}</div>
-);
-
-ColumnAverage.propTypes = {
-  amount: PropTypes.number.isRequired,
-};
-
-export default ColumnAvп;
+export default ColumnAvg;
