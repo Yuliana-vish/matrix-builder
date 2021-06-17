@@ -1,36 +1,31 @@
 //import { Component } from 'react';
 import Form from './Components/Form';
-import Table from './Components/TableMatrix/Table';
+import TableMatrix from './Components/TableMatrix';
 import './App.css';
 //import GetRandomMatrix from './Components/TableMatrix/GetRandomMatrix';
 import { useState } from 'react';
 
-
 const App = () => {
-  const [matrix, setMatrix] = useState()
+  const [matrix, setMatrix] = useState();
 
-  const onHandleSubmit = (event) => {
+  const onHandleSubmit = event => {
     //console.log(event)
     setMatrix(event);
-  }
-  
+  };
+
   return (
     <>
       <section className="/">
         <Form onSubmit={onHandleSubmit} />
       </section>
       <section className="/">
-        {matrix && <Table {...matrix} />}
+        {matrix && <TableMatrix matrix={matrix} />}
       </section>
     </>
   );
-
-}
-
-
+};
 
 export default App;
-
 
 // class App extends Component {
 //   state = {
