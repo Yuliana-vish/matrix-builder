@@ -16,6 +16,7 @@ class Form extends Component {
   submitForm = event => {
     event.preventDefault();
     this.props.onSubmit(this.state);
+
     this.reset();
   };
 
@@ -36,4 +37,3 @@ class Form extends Component {
 }
 
 export default Form;
-

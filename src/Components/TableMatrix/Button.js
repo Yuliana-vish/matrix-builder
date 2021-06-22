@@ -1,4 +1,3 @@
-// import React, { FC } from 'react';
 // import styles from './name.module.scss';
 import { addRow } from '../../core/function';
 

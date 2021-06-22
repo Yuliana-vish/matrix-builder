@@ -1,14 +1,17 @@
-import ColumnAvg from './ColumnAvg';
-import RowSum from './RowSum';
 import { useEffect, useState } from 'react';
 import { randomGenerator } from '../../../core/function';
+import ColumnAvg from './ColumnAvg';
+import RowSumCell from './RowSumCell';
+import TableItem from './TableItem';
+import RemoveButton from './RemoveButton';
 
 const TableBody = ({ columns, rows, cells }) => {
   const [arr, setArr] = useState();
   const [matrixRows, setMatrixRows] = useState();
+  const [currentRowsNum, setCurrentRowsNum] = useState(rows); // обновляю значение rows после удаления и добавления строк
 
   useEffect(() => {
-    const arr = new Array(columns * rows).fill(0).map((el, i) => {
+    const arr = new Array(columns * currentRowsNum).fill(0).map((el, i) => {
       return randomGenerator(el, i);
     });
     setArr(arr);
@@ -16,13 +19,13 @@ const TableBody = ({ columns, rows, cells }) => {
 
     let matrix = [];
     let start = 0;
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < currentRowsNum; i++) {
       matrix = [...matrix, arr.slice(start, columns * (i + 1))];
       start = columns * (i + 1);
     }
     setMatrixRows(matrix);
     console.log(matrix);
-  }, [columns, rows]);
+  }, [columns, currentRowsNum]);
 
   return (
     <tbody>
@@ -31,17 +34,24 @@ const TableBody = ({ columns, rows, cells }) => {
           <tr key={i}>
             <td>*</td>
             {row.map(item => (
-              <td key={item.ID}>{item.Amount}</td>
+              <td key={item.ID}>
+                <TableItem item={item} />
+              </td>
             ))}
-            <td>
-              <RowSum row={row} />
-            </td>
-            <td>
-              <button type="submit"> x </button>
-            </td>
+            <RowSumCell row={row} />
+            <RemoveButton
+              index={i}
+              setMatrixRows={setMatrixRows}
+              matrixRows={matrixRows}
+              setCurrentRowsNum={setCurrentRowsNum}
+            />
           </tr>
         ))}
-      <ColumnAvg matrixRows={matrixRows} columns={columns} rows={rows} />
+      <ColumnAvg
+        matrixRows={matrixRows}
+        columns={columns}
+        rows={currentRowsNum}
+      />
     </tbody>
   );
 };

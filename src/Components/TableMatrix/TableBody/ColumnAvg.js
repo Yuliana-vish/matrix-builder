@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { sumRowAvg, calcAvgNumbers } from '../../../core/function';
 
@@ -18,16 +17,12 @@ const ColumnAvg = ({ columns, rows, matrixRows }) => {
       {avg &&
         avg.map((el, index) => (
           <td key={index}>
-            <div className="/">{el}</div>
+            <div>{el}</div>
           </td>
         ))}
       {avg && <td>{sumRowAvg(avg)}</td>}
     </tr>
   );
-};
-
-ColumnAvg.propTypes = {
-  avg: PropTypes.number.isRequired,
 };
 
 export default ColumnAvg;
