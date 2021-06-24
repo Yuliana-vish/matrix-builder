@@ -3,11 +3,12 @@ import { sumRowAvg, calcAvgNumbers } from '../../../core/function';
 
 const ColumnAvg = ({ columns, rows, matrixRows }) => {
   const [avg, setAvg] = useState();
+
   useEffect(() => {
     if (matrixRows) {
       const calc = calcAvgNumbers(columns, rows, matrixRows);
       setAvg(calc);
-      console.log(calc);
+      //console.log(calc);
     }
   }, [columns, rows, matrixRows]);
 

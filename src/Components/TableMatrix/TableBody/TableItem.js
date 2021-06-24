@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 const TableItem = ({ item }) => {
   const [newAmount, setNewAmount] = useState(item.Amount);
@@ -14,10 +13,4 @@ const TableItem = ({ item }) => {
   return <div onClick={() => onClickItem(newAmount)}>{newAmount}</div>;
 };
 
-TableItem.propTypes = {
-  Amount: PropTypes.number,
-};
-TableItem.defaultProps = {
-  Amount: 0,
-};
 export default TableItem;

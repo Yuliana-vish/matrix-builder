@@ -1,59 +1,28 @@
-//import { Component } from 'react';
 import Form from './Components/Form';
 import TableMatrix from './Components/TableMatrix';
+import { connect } from 'react-redux';
 import './App.css';
-//import GetRandomMatrix from './Components/TableMatrix/GetRandomMatrix';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const App = () => {
-  const [matrix, setMatrix] = useState();
+const App = ({ settings }) => {
+  const [matrix, setMatrix] = useState(false);
 
-  const onHandleSubmit = event => {
-    //console.log(event)
-    setMatrix(event);
-  };
+  useEffect(() => {
+    setMatrix(true);
+  }, [settings]);
 
   return (
     <>
       <section className="/">
-        <Form onSubmit={onHandleSubmit} />
+        <Form />
       </section>
-      <section className="/">
-        {matrix && <TableMatrix matrix={matrix} />}
-      </section>
+      <section className="/">{matrix && <TableMatrix />}</section>
     </>
   );
 };
 
-export default App;
+const mapStateToProps = state => ({
+  settings: state.matrix.settings,
+});
 
-// class App extends Component {
-//   state = {
-//     columns: '',
-//     rows: '',
-//     cells: '',
-//   };
-
-//   submitForm = data => {
-//     this.setState(data);
-//     console.log(data);
-//   };
-
-//   render() {
-//     return (
-//       <>
-//         <section className="/">
-//           <Form
-//             onSubmit={this.submitForm}
-//             state={this.state}
-//             resetState={this.setState}
-//           />
-//         </section>
-//         <section className="/">
-//           {/* <GetRandomMatrix {...this.state} /> */}
-//           <Table />
-//         </section>
-//       </>
-//     );
-//   }
-// }
+export default connect(mapStateToProps)(App);

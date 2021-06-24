@@ -1,39 +1,3 @@
-
-// return (
-//   <div className="matrix" style="/">
-    {/* {matrix.map((item, index) => (
-        ((index % columnsNumber) === (columnsNumber - 1))
-          ? (
-            <>
-              <MatrixItem
-                key={item.ID}
-                matrixItem={item}
-                percentage={item.Amount / rowSums[Math.floor(index / columnsNumber)]}
-              />
-              <RowSum
-                key={uuidv4()}
-                amount={rowSums[Math.floor(index / columnsNumber)]}
-              />
-            </>
-          )
-          : (
-            <MatrixItem
-              key={item.ID}
-              matrixItem={item}
-              percentage={item.Amount / rowSums[Math.floor(index / columnsNumber)]}
-            />
-          )
-      ))}
-      {columnAverage.map((item) => (
-        <ColumnAverage
-          key={uuidv4()}
-          amount={item}
-        />
-      ))} */}
-  {/* </div>
-);
-}; */}
-
 Задание Frontend на работу с объектами
 Технические условия
 Использовать react + redux

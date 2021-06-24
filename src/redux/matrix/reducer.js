@@ -1,5 +1,4 @@
-//import { combineReducers } from 'redux';
-import types from '../matrix/types';
+import types from './types';
 
 const initialState = {
   settings: {
@@ -14,33 +13,27 @@ const initialState = {
   matrix: [],
 };
 
-export const settings = (state = initialState.settings, { type, payload }) => {
+export const matrix = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.GET_SETTINGS:
-      return [...state, payload];
+      //console.log(payload);
+      return { ...state.settings, settings: { ...payload } };
 
-    default:
-      return state;
-  }
-};
-
-export const matrix = (state = initialState.settings, { type, payload }) => {
-  switch (type) {
     case types.CREATE_MATRIX:
-      return [...state, payload];
+      return { ...state, matrix: { ...payload } };
 
-    case types.ADD_ROWS:
-      return [...state, payload];
+    case types.INCREMENT_CELL:
+      return { ...state.arr, payload };
 
-    case types.DELETE_ROWS:
-      return state.filter(({ id }) => id !== payload);
+    case types.ADD_ROW:
+      return { ...state, payload };
+
+    case types.DELETE_ROW:
+      return state.filter(row => row.id !== payload);
 
     default:
       return state;
   }
 };
 
-// export default combineReducers({
-//   settings,
-//   matrix,
-// });
+export default matrix;

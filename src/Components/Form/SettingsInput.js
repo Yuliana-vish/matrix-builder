@@ -1,4 +1,4 @@
-const GetSettings = ({ addInputData, columns, rows, cells }) => {
+const SettingsInput = ({ addInputData, columns, rows, cells }) => {
   return (
     <>
       <div>
@@ -44,4 +44,4 @@ const GetSettings = ({ addInputData, columns, rows, cells }) => {
   );
 };
 
-export default GetSettings;
+export default SettingsInput;
