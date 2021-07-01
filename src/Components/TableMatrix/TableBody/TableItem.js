@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { connect } from 'react-redux';
+import actions from '../../../redux/matrix/actions';
 
-const TableItem = ({ item }) => {
-  const [newAmount, setNewAmount] = useState(item.Amount);
-
+const TableItem = ({ item, incrementCell }) => {
   const onClickItem = () => {
-    if (newAmount < 999) {
-      const calc = newAmount + 1;
-      setNewAmount(calc);
+    if (item.Amount < 999) {
+      incrementCell(item);
     }
   };
-
-  return <div onClick={() => onClickItem(newAmount)}>{newAmount}</div>;
+  return (
+    <div className="amount" onClick={onClickItem}>
+      {item.Amount}
+    </div>
+  );
 };
 
-export default TableItem;
+const mapDispatchToProps = {
+  incrementCell: actions.incrementCell,
+};
+
+export default connect(null, mapDispatchToProps)(TableItem);

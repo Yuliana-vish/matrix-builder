@@ -1,80 +1,72 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { randomGenerator } from '../../../core/function';
 import ColumnAvg from './ColumnAvg';
 import RowSumCell from './RowSumCell';
+import Percentage from './Percentage';
 import TableItem from './TableItem';
 import RemoveButton from './RemoveButton';
-//import actions from '../../../redux/matrix/actions';
+import actions from '../../../redux/matrix/actions';
 
-const TableBody = ({ columns, rows, cells }) => {
-  const [arr, setArr] = useState();
-  const [matrixRows, setMatrixRows] = useState();
-  const [currentRowsNum, setCurrentRowsNum] = useState(rows); // обновляю значение rows после удаления и добавления строк
-
-  // const matrixRows = useMemo(() => {
-  //   if (columns && currentRowsNum) {
-  //     const arr = new Array(columns * currentRowsNum).fill(0).map((el, i) => {
-  //       return randomGenerator(el, i);
-  //     });
-  //     setArr(arr);
-  //     console.log(arr);
-
-  //     let matrix = [];
-  //     let start = 0;
-  //     for (let i = 0; i < currentRowsNum; i++) {
-  //       matrix = [...matrix, arr.slice(start, columns * (i + 1))];
-  //       start = columns * (i + 1);
-  //     }
-  //     return matrix;
-  //     console.log(matrix);
-  //   }
-  // }, [columns, currentRowsNum]);
+const TableBody = ({
+  columns,
+  rows,
+  cells,
+  getRandomNumbers,
+  arr,
+  createMatrix,
+  matrixRows,
+}) => {
+  const [showPercent, setShowPercent] = useState(-1);
 
   useEffect(() => {
-    if (columns && currentRowsNum) {
-      const arr = new Array(columns * currentRowsNum).fill(0).map((el, i) => {
+    if (columns && rows) {
+      const arr = new Array(columns * rows).fill(0).map((el, i) => {
         return randomGenerator(el, i);
       });
-      setArr(arr);
+      getRandomNumbers(arr);
       console.log(arr);
+    }
+  }, []);
 
-      let matrix = [];
+  useEffect(() => {
+    if (arr) {
+      let matrixRows = [];
       let start = 0;
-      for (let i = 0; i < currentRowsNum; i++) {
-        matrix = [...matrix, arr.slice(start, columns * (i + 1))];
+      for (let i = 0; i < rows; i++) {
+        matrixRows = [...matrixRows, arr.slice(start, columns * (i + 1))];
         start = columns * (i + 1);
       }
-      setMatrixRows(matrix);
-      console.log(matrix);
+      createMatrix(matrixRows);
+      console.log(matrixRows);
     }
-  }, [columns, currentRowsNum]);
+  }, [arr]);
 
   return (
     <tbody>
       {matrixRows &&
         matrixRows.map((row, i) => (
           <tr key={i}>
-            <td>*</td>
+            <td className="amount banner">{i + 1}</td>
             {row.map(item => (
-              <td key={item.ID}>
-                <TableItem item={item} />
+              <td className="table-item" key={item.ID}>
+                {showPercent === i ? (
+                  <Percentage item={item} row={row} />
+                ) : (
+                  <TableItem item={item} />
+                )}
               </td>
             ))}
-            <RowSumCell row={row} />
-            <RemoveButton
-              index={i}
-              setMatrixRows={setMatrixRows}
-              matrixRows={matrixRows}
-              setCurrentRowsNum={setCurrentRowsNum}
+
+            <RowSumCell
+              row={row}
+              handleMouseEnter={() => setShowPercent(i)}
+              handleMouseLeave={() => setShowPercent(-1)}
             />
+            <RemoveButton index={i} matrixRows={matrixRows} rows={rows} />
           </tr>
         ))}
-      <ColumnAvg
-        matrixRows={matrixRows}
-        columns={columns}
-        rows={currentRowsNum}
-      />
+      <ColumnAvg matrixRows={matrixRows} columns={columns} rows={rows} />
     </tbody>
   );
 };
@@ -83,7 +75,12 @@ const mapStateToProps = state => ({
   columns: state.matrix.settings.columns,
   rows: state.matrix.settings.rows,
   cells: state.matrix.settings.cells,
+  arr: state.matrix.arr,
+  matrixRows: state.matrix.matrixRows,
 });
 
-export default connect(mapStateToProps)(TableBody);
-//export default TableBody;
+const mapDispatchToProps = {
+  getRandomNumbers: actions.getRandomNumbers,
+  createMatrix: actions.createMatrix,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TableBody);

@@ -9,12 +9,6 @@ class Form extends Component {
     getSettings: PropTypes.func.isRequired,
   };
 
-  state = {
-    columns: '',
-    rows: '',
-    cells: '',
-  };
-
   handleClick = event => {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: +value });
@@ -45,7 +39,7 @@ class Form extends Component {
     return (
       <>
         <form className="/" onSubmit={this.submitForm}>
-          <h2>Matrix builder</h2>
+          <h1 className="title">Matrix builder</h1>
           <SettingsInput addInputData={this.handleClick} {...this.state} />
         </form>
       </>

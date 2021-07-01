@@ -4,29 +4,37 @@ export const getSettings = settings => ({
   type: types.GET_SETTINGS,
   payload: settings,
 });
-
-export const createMatrix = arr => ({
+export const getRandomNumbers = arr => ({
+  type: types.GET_RANDOM_NUMBERS,
+  payload: arr,
+});
+export const createMatrix = matrixRows => ({
   type: types.CREATE_MATRIX,
-  arr,
+  payload: matrixRows,
 });
-export const incrementCell = (ID, Amount) => ({
+export const incrementCell = item => ({
   type: types.INCREMENT_CELL,
-  ID,
-  Amount: Amount + 1,
+  payload: item,
 });
-export const addRow = () => ({
-  type: types.ADD_ROW,
-});
-export const deleteRow = rows => ({
+export const deleteRow = index => ({
   type: types.DELETE_ROW,
-  row: rows - 1,
+  payload: index,
 });
+export const addRow = row => ({
+  type: types.ADD_ROW,
+  payload: row,
+});
+// export const rowSum = row => ({
+//   type: types.ROW_SUM,
+//   payload: row,
+// });
 
 // eslint-disable-next-line
 export default {
   addRow,
   deleteRow,
   getSettings,
-  createMatrix,
   incrementCell,
+  createMatrix,
+  getRandomNumbers,
 };

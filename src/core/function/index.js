@@ -22,17 +22,3 @@ export const calcAvgNumbers = (columns, rows, matrixRows) => {
   }
   return columnAvg;
 };
-
-// export const showPercentage = ({ sum, value }) => {
-//   const percent = ((value * 100) / sum).toFixed();
-//   const style = {
-//     backgroundSize: `100% ${percent}% `,
-//   };
-//   return (
-//     <td>
-//       <div style={style}>{percent}%</div>
-//     </td>
-//   );
-// };
-
-export const addRow = () => {};

@@ -1,38 +1,29 @@
 import { connect } from 'react-redux';
-//import actions from '../../../redux/matrix/actions';
-//import { useSelector, useDispatch } from 'react-redux';
+import actions from '../../../redux/matrix/actions';
 
-const RemoveButton = ({
-  index,
-  setMatrixRows,
-  matrixRows,
-  setCurrentRowsNum,
-}) => {
+const RemoveButton = ({ index, deleteRow }) => {
   const removeRow = () => {
-    //console.log(matrixRows, index);
-    const deleteRow = matrixRows.filter((el, i) => index !== i);
-    setCurrentRowsNum(prevState => prevState - 1); //обновляю state
-    //console.log(deleteRow);
-    setMatrixRows(deleteRow);
+    deleteRow(index);
+    console.log(removeRow);
   };
 
   return (
     <td>
-      <button type="submit" onClick={() => removeRow()}>
+      <button
+        className="remove-button"
+        type="submit"
+        onClick={() => removeRow()}
+      >
         x
       </button>
     </td>
   );
 };
 
-// const mapStateToProps = state => ({
-//   settings: state.settings,
-// });
+const mapDispatchToProps = {
+  deleteRow: actions.deleteRow,
+};
 
-// const mapDispatchToProps = {
-//   deleteRow: actions.deleteRow,
-// };
+export default connect(null, mapDispatchToProps)(RemoveButton);
 
-//export default connect(mapStateToProps, mapDispatchToProps)(RemoveButton);
-
-export default RemoveButton;
+//export default RemoveButton;

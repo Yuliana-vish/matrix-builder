@@ -7,9 +7,10 @@ const TableMatrix = ({ settings }) => {
   console.log('settings', settings);
   return (
     <>
-      <hr />
-      <div className="/">
-        <table className="/">
+      <div className="table">
+        {settings.columns && settings.rows && settings.cells && <Button />}
+
+        <table className="table-matrix">
           {settings.columns && settings.rows && settings.cells && (
             <>
               <TableHeader {...settings} />
@@ -17,7 +18,6 @@ const TableMatrix = ({ settings }) => {
             </>
           )}
         </table>
-        <Button />
       </div>
     </>
   );

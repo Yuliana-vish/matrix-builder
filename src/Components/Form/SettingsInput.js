@@ -1,11 +1,13 @@
 const SettingsInput = ({ addInputData, columns, rows, cells }) => {
   return (
     <>
-      <div>
-        <label htmlFor="/">enter the number of columns </label>
+      <div className="form-input">
+        <label className="input-text" htmlFor="/">
+          enter the number of columns
+        </label>
         <input
           type="number"
-          className="/"
+          className="input"
           name="columns"
           min="0"
           value={columns}
@@ -13,11 +15,13 @@ const SettingsInput = ({ addInputData, columns, rows, cells }) => {
         />
       </div>
 
-      <div>
-        <label htmlFor="/">enter the number of rows </label>
+      <div className="form-input">
+        <label className="input-text" htmlFor="/">
+          enter the number of rows
+        </label>
         <input
           type="number"
-          className="/"
+          className="input"
           name="rows"
           min="0"
           value={rows}
@@ -25,11 +29,13 @@ const SettingsInput = ({ addInputData, columns, rows, cells }) => {
         />
       </div>
 
-      <div>
-        <label htmlFor="/">enter the number of cells </label>
+      <div className="form-input">
+        <label className="input-text" htmlFor="/">
+          enter the number of cells
+        </label>
         <input
           type="number"
-          className="/"
+          className="input"
           name="cells"
           min="0"
           value={cells}
@@ -37,9 +43,11 @@ const SettingsInput = ({ addInputData, columns, rows, cells }) => {
         />
       </div>
 
-      <button className="/" type="submit">
-        create matrix
-      </button>
+      <div className="btn-form">
+        <button className="button btn-create" type="submit">
+          create matrix
+        </button>
+      </div>
     </>
   );
 };

@@ -13,10 +13,10 @@ const App = ({ settings }) => {
 
   return (
     <>
-      <section className="/">
+      <section className="section-form">
         <Form />
       </section>
-      <section className="/">{matrix && <TableMatrix />}</section>
+      <section className="section-table">{matrix && <TableMatrix />}</section>
     </>
   );
 };

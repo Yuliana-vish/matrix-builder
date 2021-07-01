@@ -1,7 +1,11 @@
 //import { connect } from 'react-redux';
 
 const topCells = value => {
-  return <th key={value}>{value}</th>;
+  return (
+    <th className="header-item" key={value}>
+      {value}
+    </th>
+  );
 };
 
 const TopUnit = columns => {
@@ -16,15 +20,10 @@ const TopUnit = columns => {
 const TableHeader = ({ columns }) => {
   const banner = TopUnit(columns);
   return (
-    <thead>
+    <thead className="table-header">
       <tr>{banner}</tr>
     </thead>
   );
 };
 
-// const mapStateToProps = state => ({
-//   columns: state.settings,
-// });
-
-// export default connect(mapStateToProps)(TableHeader);
 export default TableHeader;

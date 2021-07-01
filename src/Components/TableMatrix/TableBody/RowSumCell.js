@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { sumRowNumbers } from '../../../core/function';
 
-const RowSumCell = ({ row }) => {
-  const [sum] = useState(sumRowNumbers(row));
-  //console.log(sum);
+const RowSumCell = ({ row, handleMouseEnter, handleMouseLeave }) => {
+  const [sum, setSum] = useState(sumRowNumbers(row));
+
+  useEffect(() => {
+    setSum(sumRowNumbers(row));
+  }, [row]);
 
   return (
-    <td>
-      <div>{sum}</div>
+    <td
+      className="table-item amount"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="amount">{sum}</div>
     </td>
   );
 };

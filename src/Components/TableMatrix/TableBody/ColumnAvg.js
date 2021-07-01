@@ -8,20 +8,19 @@ const ColumnAvg = ({ columns, rows, matrixRows }) => {
     if (matrixRows) {
       const calc = calcAvgNumbers(columns, rows, matrixRows);
       setAvg(calc);
-      //console.log(calc);
     }
   }, [columns, rows, matrixRows]);
 
   return (
     <tr>
-      <td>Avg</td>
+      <td className="amount banner">Avg</td>
       {avg &&
         avg.map((el, index) => (
-          <td key={index}>
-            <div>{el}</div>
+          <td className="table-item" key={index}>
+            <div className="amount">{el}</div>
           </td>
         ))}
-      {avg && <td>{sumRowAvg(avg)}</td>}
+      {avg && <td className="table-item amount">{sumRowAvg(avg)}</td>}
     </tr>
   );
 };
