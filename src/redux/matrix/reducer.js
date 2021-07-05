@@ -1,5 +1,5 @@
 import types from './types';
-import { randomGenerator } from '../../core/function';
+import { randomGenerator, matrixSort } from '../../core/function';
 
 const initialState = {
   settings: {
@@ -7,7 +7,6 @@ const initialState = {
     rows: '',
     cells: '',
   },
-
   matrixRows: [],
   sortedMatrix: [],
   nearest: [],
@@ -16,7 +15,6 @@ const initialState = {
 export const matrix = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.SET_SETTINGS:
-      // console.log(payload.sortedMatrix);
       return {
         ...state.settings,
         settings: payload.settings,
@@ -24,14 +22,11 @@ export const matrix = (state = initialState, { type, payload }) => {
         sortedMatrix: payload.sortedMatrix,
       };
 
-    case types.GET_RANDOM_NUMBERS:
-      return { ...state, arr: [...payload] };
-
     case types.CREATE_MATRIX:
       return { ...state, matrixRows: [...payload] };
 
     case types.INCREMENT_CELL:
-      const newmatrixRows = state.matrixRows.map(row => {
+      const newMatrixRows = state.matrixRows.map(row => {
         return row.map(item => {
           if (item.ID === payload.ID) {
             item.Amount += 1;
@@ -40,29 +35,35 @@ export const matrix = (state = initialState, { type, payload }) => {
           return item;
         });
       });
-      // console.log(newmatrixRows);
       return {
         ...state,
-        matrixRows: newmatrixRows,
+        matrixRows: newMatrixRows,
+        sortedMatrix: [...matrixSort([...state.sortedMatrix])],
       };
 
     case types.DELETE_ROW:
       return {
         ...state,
+        sortedMatrix: [
+          ...matrixSort([
+            ...state.sortedMatrix.filter(el =>
+              state.matrixRows[payload].every(element => element.ID !== el.ID),
+            ),
+          ]),
+        ],
         matrixRows: state.matrixRows.filter((el, index) => index !== payload),
         settings: { ...state.settings, rows: state.settings.rows - 1 },
       };
 
     case types.ADD_ROW:
-      const arrRow = new Array(state.settings.columns * 1)
-        .fill(0)
-        .map((el, i) => {
-          return randomGenerator(el, i);
-        });
+      const arrRow = new Array(state.settings.columns * 1).fill(0).map(() => {
+        return randomGenerator();
+      });
       return {
         ...state,
         settings: { ...state.settings, rows: state.settings.rows + 1 },
         matrixRows: [...state.matrixRows, arrRow],
+        sortedMatrix: [...matrixSort([...state.sortedMatrix, ...arrRow])],
       };
 
     case types.SET_NEAREST_CELLS:

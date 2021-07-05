@@ -1,6 +1,8 @@
-export const randomGenerator = (item, i) => ({
+import { v4 as uuidv4 } from 'uuid';
+
+export const randomGenerator = () => ({
   Amount: Math.floor(Math.random() * (999 - 100 + 1)) + 100,
-  ID: i,
+  ID: uuidv4(),
 });
 
 export const createMatrix = settings => {
@@ -8,7 +10,7 @@ export const createMatrix = settings => {
     const arr = new Array(settings.columns * settings.rows)
       .fill(0)
       .map((el, i) => {
-        return randomGenerator(el, i);
+        return randomGenerator();
       });
     console.log(arr);
 
@@ -24,6 +26,12 @@ export const createMatrix = settings => {
     return matrixRows;
   }
 };
+
+export const matrixSort = matrix =>
+  matrix
+    .flat()
+    .map(item => item)
+    .sort((a, b) => a.Amount - b.Amount);
 
 export const sumRowNumbers = row => {
   return row.reduce((acc, el) => acc + Number(el.Amount), 0);
@@ -46,18 +54,13 @@ export const calcAvgNumbers = (columns, rows, matrixRows) => {
 };
 
 export const findNearestCells = (cells, sortedMatrix, item) => {
-  let copySortedMatrix = [...sortedMatrix];
+  let copySortedMatrix = [...[], ...sortedMatrix];
   let nearestCells = [];
 
   for (let i = 0; i < cells; i++) {
-    let copySortedMatrixId = [];
-    let copySortedMatrixAm = [];
-    copySortedMatrix.forEach(el => {
-      copySortedMatrixId.push(el.ID);
-      copySortedMatrixAm.push(el.Amount);
-    });
+    const copySortedMatrixId = copySortedMatrix.map(item => item.ID);
+
     if (item) {
-      // console.log(item);
       let nearest;
       const itemIndex = copySortedMatrixId.indexOf(item.ID);
       if (itemIndex === 0) {

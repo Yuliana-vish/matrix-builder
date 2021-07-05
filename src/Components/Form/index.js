@@ -1,19 +1,12 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import actions from '../../redux/matrix/actions';
 import SettingsInput from './SettingsInput';
 
 class Form extends Component {
-  static propTypes = {
-    setSettings: PropTypes.func.isRequired,
-  };
-
   handleClick = event => {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: +value });
-
-    //console.log(typeof value);
   };
 
   submitForm = event => {
@@ -25,9 +18,6 @@ class Form extends Component {
     };
     this.props.setSettings(settings);
     console.log(settings);
-
-    //this.props.onSubmit(this.state);
-
     this.reset();
   };
 
@@ -50,7 +40,6 @@ class Form extends Component {
 const mapStateToProps = state => ({
   settings: state.settings,
 });
-
 const mapDispatchToProps = {
   setSettings: actions.setSettings,
 };

@@ -8,7 +8,7 @@ const RemoveButton = ({ index, deleteRow }) => {
   };
 
   return (
-    <td>
+    <td className="banner">
       <button
         className="remove-button"
         type="submit"
@@ -25,5 +25,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(RemoveButton);
-
-//export default RemoveButton;

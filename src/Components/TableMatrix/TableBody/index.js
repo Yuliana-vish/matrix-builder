@@ -6,25 +6,21 @@ import Percentage from './Percentage';
 import TableItem from './TableItem';
 import RemoveButton from './RemoveButton';
 
-const TableBody = ({ columns, rows, cells, matrixRows, sortedMatrix }) => {
+const TableBody = ({ columns, rows, cells, matrixRows }) => {
   const [showPercent, setShowPercent] = useState(-1);
 
   return (
     <tbody>
       {!!matrixRows &&
         matrixRows.map((row, i) => (
-          <tr key={i}>
+          <tr key={JSON.stringify(row)}>
             <td className="banner">{i + 1}</td>
             {row.map(item => (
-              <td className="table-item" key={item.ID}>
+              <td className="table-item" key={item.Amount}>
                 {showPercent === i ? (
                   <Percentage item={item} row={row} />
                 ) : (
-                  <TableItem
-                    item={item}
-                    cells={cells}
-                    sortedMatrix={sortedMatrix}
-                  />
+                  <TableItem item={item} cells={cells} />
                 )}
               </td>
             ))}
@@ -50,8 +46,4 @@ const mapStateToProps = state => ({
   sortedMatrix: state.matrix.sortedMatrix,
 });
 
-// const mapDispatchToProps = {
-//   getRandomNumbers: actions.getRandomNumbers,
-//   //createMatrix: actions.createMatrix,
-// };
 export default connect(mapStateToProps)(TableBody);

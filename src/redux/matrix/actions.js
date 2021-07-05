@@ -1,13 +1,13 @@
 import types from './types';
-import { createMatrix, findNearestCells } from '../../core/function';
+import {
+  createMatrix,
+  findNearestCells,
+  matrixSort,
+} from '../../core/function';
 
 export const setSettings = settings => {
   const matrix = createMatrix(settings);
-  const sortedMatrix = matrix
-    .flat()
-    .map(item => item)
-    .sort((a, b) => a.Amount - b.Amount);
-  // console.log(sortedMatrix);
+  const sortedMatrix = matrixSort(matrix);
   return {
     type: types.SET_SETTINGS,
     payload: { settings, matrix, sortedMatrix },
@@ -29,7 +29,6 @@ export const addRow = row => ({
 
 export const setNearestCells = (cells, sortedMatrix, item) => {
   const nearest = findNearestCells(cells, sortedMatrix, item);
-  // console.log(nearest);
   return {
     type: types.SET_NEAREST_CELLS,
     payload: { sortedMatrix, nearest },

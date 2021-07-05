@@ -1,5 +1,3 @@
-//import { connect } from 'react-redux';
-
 const topCells = value => {
   return (
     <th className="header-item" key={value}>

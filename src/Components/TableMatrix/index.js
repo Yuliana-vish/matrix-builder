@@ -4,7 +4,7 @@ import TableBody from './TableBody';
 import Button from './Button';
 
 const TableMatrix = ({ settings }) => {
-  console.log('settings', settings);
+  //console.log('settings', settings);
   return (
     <div className="table">
       {settings.columns && settings.rows && settings.cells && <Button />}
@@ -25,4 +25,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(TableMatrix);
-//export default Table;

@@ -14,7 +14,7 @@ const RowSumCell = ({ row, handleMouseEnter, handleMouseLeave }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="amount">{sum}</div>
+      <div className="amount sum">{sum}</div>
     </td>
   );
 };

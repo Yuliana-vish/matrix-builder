@@ -14,6 +14,7 @@ const TableItem = ({
   const onClickItem = () => {
     if (item.Amount < 999) {
       incrementCell(item);
+      handleMouseEnter();
     }
   };
 
@@ -24,6 +25,7 @@ const TableItem = ({
   const handleMouseLeave = () => {
     resetNearestCells();
   };
+
   return (
     <div
       className={cx('amount', {
@@ -40,6 +42,7 @@ const TableItem = ({
 
 const mapStateToProps = state => ({
   nearest: state.matrix.nearest,
+  sortedMatrix: state.matrix.sortedMatrix,
 });
 
 const mapDispatchToProps = {

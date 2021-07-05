@@ -1,4 +1,3 @@
-//import { addRow } from '../../../core/function';
 import { connect } from 'react-redux';
 import actions from '../../../redux/matrix/actions';
 
@@ -25,11 +24,10 @@ const mapStateToProps = state => ({
   rows: state.matrix.settings.rows,
   matrixRows: state.matrix.matrixRows,
 });
-
 const mapDispatchToProps = {
   addRow: actions.addRow,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Button);
 
-//export default Button;
+

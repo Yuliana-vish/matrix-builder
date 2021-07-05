@@ -17,12 +17,12 @@ const ColumnAvg = ({ columns, rows, matrixRows }) => {
       {avg &&
         avg.map((el, index) => (
           <td className="table-item" key={index}>
-            <div className="amount">{el}</div>
+            <div className="amount avg">{el}</div>
           </td>
         ))}
       {avg && (
         <td className="table-item">
-          <div className="amount">{sumRowAvg(avg)}</div>
+          <div className="amount avg">{sumRowAvg(avg)}</div>
         </td>
       )}
     </tr>
