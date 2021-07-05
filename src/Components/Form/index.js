@@ -6,7 +6,7 @@ import SettingsInput from './SettingsInput';
 
 class Form extends Component {
   static propTypes = {
-    getSettings: PropTypes.func.isRequired,
+    setSettings: PropTypes.func.isRequired,
   };
 
   handleClick = event => {
@@ -23,7 +23,7 @@ class Form extends Component {
       rows: this.state.rows,
       cells: this.state.cells,
     };
-    this.props.getSettings(settings);
+    this.props.setSettings(settings);
     console.log(settings);
 
     //this.props.onSubmit(this.state);
@@ -52,7 +52,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSettings: actions.getSettings,
+  setSettings: actions.setSettings,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

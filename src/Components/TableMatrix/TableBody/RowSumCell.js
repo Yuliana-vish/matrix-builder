@@ -10,7 +10,7 @@ const RowSumCell = ({ row, handleMouseEnter, handleMouseLeave }) => {
 
   return (
     <td
-      className="table-item amount"
+      className="table-item"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

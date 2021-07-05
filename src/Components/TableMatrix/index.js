@@ -6,20 +6,17 @@ import Button from './Button';
 const TableMatrix = ({ settings }) => {
   console.log('settings', settings);
   return (
-    <>
-      <div className="table">
-        {settings.columns && settings.rows && settings.cells && <Button />}
-
-        <table className="table-matrix">
-          {settings.columns && settings.rows && settings.cells && (
-            <>
-              <TableHeader {...settings} />
-              <TableBody />
-            </>
-          )}
-        </table>
-      </div>
-    </>
+    <div className="table">
+      {settings.columns && settings.rows && settings.cells && <Button />}
+      <table className="table-matrix">
+        {settings.columns && settings.rows && settings.cells && (
+          <>
+            <TableHeader {...settings} />
+            <TableBody />
+          </>
+        )}
+      </table>
+    </div>
   );
 };
 

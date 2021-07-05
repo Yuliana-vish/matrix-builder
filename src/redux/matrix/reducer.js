@@ -7,19 +7,22 @@ const initialState = {
     rows: '',
     cells: '',
   },
-  arr: [
-    {
-      Amount: '',
-      ID: '',
-    },
-  ],
+
   matrixRows: [],
+  sortedMatrix: [],
+  nearest: [],
 };
 
 export const matrix = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.GET_SETTINGS:
-      return { ...state.settings, settings: { ...payload } };
+    case types.SET_SETTINGS:
+      // console.log(payload.sortedMatrix);
+      return {
+        ...state.settings,
+        settings: payload.settings,
+        matrixRows: payload.matrix,
+        sortedMatrix: payload.sortedMatrix,
+      };
 
     case types.GET_RANDOM_NUMBERS:
       return { ...state, arr: [...payload] };
@@ -28,13 +31,19 @@ export const matrix = (state = initialState, { type, payload }) => {
       return { ...state, matrixRows: [...payload] };
 
     case types.INCREMENT_CELL:
+      const newmatrixRows = state.matrixRows.map(row => {
+        return row.map(item => {
+          if (item.ID === payload.ID) {
+            item.Amount += 1;
+            return item;
+          }
+          return item;
+        });
+      });
+      // console.log(newmatrixRows);
       return {
         ...state,
-        arr: state.arr.map(el =>
-          el.ID === payload.ID
-            ? { Amount: el.Amount + 1, ID: el.ID }
-            : { Amount: el.Amount, ID: el.ID },
-        ),
+        matrixRows: newmatrixRows,
       };
 
     case types.DELETE_ROW:
@@ -55,16 +64,16 @@ export const matrix = (state = initialState, { type, payload }) => {
         settings: { ...state.settings, rows: state.settings.rows + 1 },
         matrixRows: [...state.matrixRows, arrRow],
       };
-    
-    // case types.ROW_SUM:
-    //   const sumRowNumbers = row => {
-    //   return row.reduce((acc, el) => acc + Number(el.Amount), 0);
-    //   };
-    //   return {
 
-    //   }
-      
-      
+    case types.SET_NEAREST_CELLS:
+      return {
+        ...state,
+        nearest: [...payload.nearest],
+      };
+
+    case types.RESET_NEAREST_CELLS:
+      return { ...state, nearest: initialState.nearest };
+
     default:
       return state;
   }

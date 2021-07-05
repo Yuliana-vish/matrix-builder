@@ -3,6 +3,28 @@ export const randomGenerator = (item, i) => ({
   ID: i,
 });
 
+export const createMatrix = settings => {
+  if (settings.columns && settings.rows) {
+    const arr = new Array(settings.columns * settings.rows)
+      .fill(0)
+      .map((el, i) => {
+        return randomGenerator(el, i);
+      });
+    console.log(arr);
+
+    let matrixRows = [];
+    let start = 0;
+    for (let i = 0; i < settings.rows; i++) {
+      matrixRows = [
+        ...matrixRows,
+        arr.slice(start, settings.columns * (i + 1)),
+      ];
+      start = settings.columns * (i + 1);
+    }
+    return matrixRows;
+  }
+};
+
 export const sumRowNumbers = row => {
   return row.reduce((acc, el) => acc + Number(el.Amount), 0);
 };
@@ -21,4 +43,38 @@ export const calcAvgNumbers = (columns, rows, matrixRows) => {
     columnAvg = [...columnAvg, Math.round(acc / Number(rows))];
   }
   return columnAvg;
+};
+
+export const findNearestCells = (cells, sortedMatrix, item) => {
+  let copySortedMatrix = [...sortedMatrix];
+  let nearestCells = [];
+
+  for (let i = 0; i < cells; i++) {
+    let copySortedMatrixId = [];
+    let copySortedMatrixAm = [];
+    copySortedMatrix.forEach(el => {
+      copySortedMatrixId.push(el.ID);
+      copySortedMatrixAm.push(el.Amount);
+    });
+    if (item) {
+      // console.log(item);
+      let nearest;
+      const itemIndex = copySortedMatrixId.indexOf(item.ID);
+      if (itemIndex === 0) {
+        nearest = copySortedMatrix[1];
+      } else if (itemIndex === copySortedMatrix.length - 1) {
+        nearest = copySortedMatrix[copySortedMatrix.length - 2];
+      } else {
+        const prevEl = copySortedMatrix[itemIndex - 1];
+        const nextEl = copySortedMatrix[itemIndex + 1];
+        nearest =
+          item.Amount - prevEl.Amount > nextEl.Amount - item.Amount
+            ? nextEl
+            : prevEl;
+      }
+      copySortedMatrix.splice(copySortedMatrixId.indexOf(nearest.ID), 1);
+      nearestCells.push(nearest);
+    }
+  }
+  return nearestCells;
 };

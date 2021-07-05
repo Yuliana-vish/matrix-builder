@@ -1,63 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
-import { randomGenerator } from '../../../core/function';
 import ColumnAvg from './ColumnAvg';
 import RowSumCell from './RowSumCell';
 import Percentage from './Percentage';
 import TableItem from './TableItem';
 import RemoveButton from './RemoveButton';
-import actions from '../../../redux/matrix/actions';
 
-const TableBody = ({
-  columns,
-  rows,
-  cells,
-  getRandomNumbers,
-  arr,
-  createMatrix,
-  matrixRows,
-}) => {
+const TableBody = ({ columns, rows, cells, matrixRows, sortedMatrix }) => {
   const [showPercent, setShowPercent] = useState(-1);
-
-  useEffect(() => {
-    if (columns && rows) {
-      const arr = new Array(columns * rows).fill(0).map((el, i) => {
-        return randomGenerator(el, i);
-      });
-      getRandomNumbers(arr);
-      console.log(arr);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (arr) {
-      let matrixRows = [];
-      let start = 0;
-      for (let i = 0; i < rows; i++) {
-        matrixRows = [...matrixRows, arr.slice(start, columns * (i + 1))];
-        start = columns * (i + 1);
-      }
-      createMatrix(matrixRows);
-      console.log(matrixRows);
-    }
-  }, [arr]);
 
   return (
     <tbody>
-      {matrixRows &&
+      {!!matrixRows &&
         matrixRows.map((row, i) => (
           <tr key={i}>
-            <td className="amount banner">{i + 1}</td>
+            <td className="banner">{i + 1}</td>
             {row.map(item => (
               <td className="table-item" key={item.ID}>
                 {showPercent === i ? (
                   <Percentage item={item} row={row} />
                 ) : (
-                  <TableItem item={item} />
+                  <TableItem
+                    item={item}
+                    cells={cells}
+                    sortedMatrix={sortedMatrix}
+                  />
                 )}
               </td>
             ))}
-
             <RowSumCell
               row={row}
               handleMouseEnter={() => setShowPercent(i)}
@@ -77,10 +47,11 @@ const mapStateToProps = state => ({
   cells: state.matrix.settings.cells,
   arr: state.matrix.arr,
   matrixRows: state.matrix.matrixRows,
+  sortedMatrix: state.matrix.sortedMatrix,
 });
 
-const mapDispatchToProps = {
-  getRandomNumbers: actions.getRandomNumbers,
-  createMatrix: actions.createMatrix,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(TableBody);
+// const mapDispatchToProps = {
+//   getRandomNumbers: actions.getRandomNumbers,
+//   //createMatrix: actions.createMatrix,
+// };
+export default connect(mapStateToProps)(TableBody);

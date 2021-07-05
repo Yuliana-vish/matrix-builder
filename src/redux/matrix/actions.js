@@ -1,17 +1,19 @@
 import types from './types';
+import { createMatrix, findNearestCells } from '../../core/function';
 
-export const getSettings = settings => ({
-  type: types.GET_SETTINGS,
-  payload: settings,
-});
-export const getRandomNumbers = arr => ({
-  type: types.GET_RANDOM_NUMBERS,
-  payload: arr,
-});
-export const createMatrix = matrixRows => ({
-  type: types.CREATE_MATRIX,
-  payload: matrixRows,
-});
+export const setSettings = settings => {
+  const matrix = createMatrix(settings);
+  const sortedMatrix = matrix
+    .flat()
+    .map(item => item)
+    .sort((a, b) => a.Amount - b.Amount);
+  // console.log(sortedMatrix);
+  return {
+    type: types.SET_SETTINGS,
+    payload: { settings, matrix, sortedMatrix },
+  };
+};
+
 export const incrementCell = item => ({
   type: types.INCREMENT_CELL,
   payload: item,
@@ -24,17 +26,27 @@ export const addRow = row => ({
   type: types.ADD_ROW,
   payload: row,
 });
-// export const rowSum = row => ({
-//   type: types.ROW_SUM,
-//   payload: row,
-// });
+
+export const setNearestCells = (cells, sortedMatrix, item) => {
+  const nearest = findNearestCells(cells, sortedMatrix, item);
+  // console.log(nearest);
+  return {
+    type: types.SET_NEAREST_CELLS,
+    payload: { sortedMatrix, nearest },
+  };
+};
+
+export const resetNearestCells = () => ({
+  type: types.RESET_NEAREST_CELLS,
+});
 
 // eslint-disable-next-line
 export default {
   addRow,
   deleteRow,
-  getSettings,
+  setSettings,
   incrementCell,
   createMatrix,
-  getRandomNumbers,
+  setNearestCells,
+  resetNearestCells,
 };
