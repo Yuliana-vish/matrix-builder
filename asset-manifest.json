@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/matrix-builder/static/css/main.f475cf33.chunk.css",
-    "main.js": "/matrix-builder/static/js/main.26fb6aff.chunk.js",
-    "main.js.map": "/matrix-builder/static/js/main.26fb6aff.chunk.js.map",
+    "main.css": "/matrix-builder/static/css/main.5d9d3463.chunk.css",
+    "main.js": "/matrix-builder/static/js/main.94f8a8d6.chunk.js",
+    "main.js.map": "/matrix-builder/static/js/main.94f8a8d6.chunk.js.map",
     "runtime-main.js": "/matrix-builder/static/js/runtime-main.b0a866ec.js",
     "runtime-main.js.map": "/matrix-builder/static/js/runtime-main.b0a866ec.js.map",
-    "static/js/2.8b97c646.chunk.js": "/matrix-builder/static/js/2.8b97c646.chunk.js",
-    "static/js/2.8b97c646.chunk.js.map": "/matrix-builder/static/js/2.8b97c646.chunk.js.map",
+    "static/js/2.6d718fe6.chunk.js": "/matrix-builder/static/js/2.6d718fe6.chunk.js",
+    "static/js/2.6d718fe6.chunk.js.map": "/matrix-builder/static/js/2.6d718fe6.chunk.js.map",
     "index.html": "/matrix-builder/index.html",
-    "static/css/main.f475cf33.chunk.css.map": "/matrix-builder/static/css/main.f475cf33.chunk.css.map",
-    "static/js/2.8b97c646.chunk.js.LICENSE.txt": "/matrix-builder/static/js/2.8b97c646.chunk.js.LICENSE.txt"
+    "static/css/main.5d9d3463.chunk.css.map": "/matrix-builder/static/css/main.5d9d3463.chunk.css.map",
+    "static/js/2.6d718fe6.chunk.js.LICENSE.txt": "/matrix-builder/static/js/2.6d718fe6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b0a866ec.js",
-    "static/js/2.8b97c646.chunk.js",
-    "static/css/main.f475cf33.chunk.css",
-    "static/js/main.26fb6aff.chunk.js"
+    "static/js/2.6d718fe6.chunk.js",
+    "static/css/main.5d9d3463.chunk.css",
+    "static/js/main.94f8a8d6.chunk.js"
   ]
 }
