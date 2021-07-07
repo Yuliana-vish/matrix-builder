@@ -1,5 +1,7 @@
 import Form from './Components/Form';
 import TableMatrix from './Components/TableMatrix';
+import RandomWords from './Components/RandomWords';
+
 import { connect } from 'react-redux';
 import './App.css';
 import { useState, useEffect } from 'react';
@@ -17,6 +19,9 @@ const App = ({ settings }) => {
         <Form />
       </section>
       <section className="section-table">{matrix && <TableMatrix />}</section>
+      <section className="section-words">
+        <RandomWords />
+      </section>
     </>
   );
 };

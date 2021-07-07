@@ -202,3 +202,38 @@ td {
 .sum.focus {
   background-color: #1ba59e;
 }
+
+/* random words */
+.section-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(250, 110, 100);
+}
+.random-words {
+}
+.btn-random {
+  color: #0d4d5e;
+  background-color: rgb(245, 248, 39);
+}
+.words-title {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+  margin-bottom: 10px;
+  /* height: 100%; */
+  color: #0d4d5e;
+  font-weight: bold;
+  background-color: #61dafb;
+  border-radius: 7px;
+  box-shadow: inset rgba(252, 255, 255, 0.7) 0 3px 8px,
+    rgba(0, 0, 0, 0.8) 0 3px 8px -3px;
+}
+.words-title:hover,
+.words-title:focus {
+  background-color: #fff;
+}
